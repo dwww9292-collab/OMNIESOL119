@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/pages/home/components/Footer';
+import Navbar from '@/components/layout/Navbar';
 
 export default function InquiryPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
     company: '',
     bizno: '',
@@ -28,25 +25,6 @@ export default function InquiryPage() {
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState('');
-
-  const navItems = [
-    { label: 'OmniEsol', path: '/' },
-    { label: 'ERP', path: '/erp' },
-    { label: '그룹웨어', path: '/groupware' },
-    { label: '문서관리', path: '/document' },
-    { label: 'AI', path: '/ai' },
-    { label: '구매요청/상담', path: '/inquiry' },
-  ];
-
-  const isActive = (path: string) => location.pathname === path;
-
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 120);
-  };
-
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-  }
 
   const handleProductChange = (product: string, checked: boolean) => {
     setFormData((prev) => ({
@@ -124,32 +102,7 @@ export default function InquiryPage() {
 
   return (
     <div className="relative w-full min-h-screen bg-white overflow-x-hidden">
-      {/* Nav */}
-      <nav
-        className={`w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? 'fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm'
-            : 'relative bg-white'
-        }`}
-      >
-        <div className="w-full">
-          <ul className="flex items-center justify-center gap-0 flex-wrap">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <button
-                  type="button"
-                  onClick={() => navigate(item.path)}
-                  className={`block px-5 md:px-6 py-4 text-sm md:text-[15px] font-medium transition-colors whitespace-nowrap cursor-pointer bg-transparent border-none ${
-                    isActive(item.path) ? 'text-omni-blue' : 'text-gray-700 hover:text-omni-blue'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Header */}
       <section

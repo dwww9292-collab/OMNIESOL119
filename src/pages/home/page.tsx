@@ -1,6 +1,5 @@
-import Banner from './components/Banner';
 import LayerBanner from './components/LayerBanner';
-import Navbar from './components/Navbar';
+import Navbar from '@/components/layout/Navbar';
 import HeroSection from './components/HeroSection';
 import IntroSection from './components/IntroSection';
 import SolutionSection from './components/SolutionSection';
@@ -11,7 +10,6 @@ import Footer from './components/Footer';
 export default function Home() {
   return (
     <div className="relative w-full min-h-screen bg-white overflow-x-hidden">
-      <Banner />
       <LayerBanner
         bannerId="layerBanner1"
         imageSrc="https://www.omniesol.com/img/main_layer_banner.png"

@@ -1,5 +1,5 @@
-import { useLocation, Link } from 'react-router-dom';
 import Footer from '@/pages/home/components/Footer';
+import Navbar from '@/components/layout/Navbar';
 
 interface SubPageLayoutProps {
   title: string;
@@ -9,42 +9,11 @@ interface SubPageLayoutProps {
 }
 
 export default function SubPageLayout({ title, children, outlinkUrl, headerBgImage }: SubPageLayoutProps) {
-  const location = useLocation();
-
-  const navItems = [
-    { label: 'OmniEsol', path: '/' },
-    { label: 'ERP', path: '/erp' },
-    { label: '그룹웨어', path: '/groupware' },
-    { label: '문서관리', path: '/document' },
-    { label: 'AI', path: '/ai' },
-    { label: '구매요청/상담', path: '/inquiry' },
-  ];
-
-  const isActive = (path: string) => location.pathname === path;
-
   const defaultOutlink = 'https://www.duzon119.co.kr/';
 
   return (
     <div className="relative w-full min-h-screen bg-white overflow-x-hidden">
-      {/* Menu */}
-      <div className="w-full bg-white border-b border-gray-100">
-        <ul className="flex items-center justify-center flex-wrap">
-          {navItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                to={item.path}
-                className={`block px-5 md:px-6 py-4 text-sm md:text-[15px] transition-colors whitespace-nowrap ${
-                  isActive(item.path)
-                    ? 'text-omni-blue font-medium'
-                    : 'text-gray-800 hover:text-omni-blue'
-                } ${index === 0 ? 'font-semibold' : ''}`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Navbar />
 
       {/* Header */}
       <section
