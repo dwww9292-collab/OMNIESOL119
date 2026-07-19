@@ -71,7 +71,9 @@ export default defineConfig({
   ],
   base,
   build: {
-    sourcemap: true,
+    // 배포본에 원본 소스가 노출되지 않도록 프로덕션에서는 소스맵을 생성하지 않는다.
+    // 디버깅이 필요하면 'hidden' 으로 두고 별도 보관하거나 일시적으로 true 로 바꾼다.
+    sourcemap: false,
     outDir: 'out',
   },
   resolve: {
