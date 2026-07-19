@@ -82,7 +82,6 @@ export default function SearchSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedKeyword, setSelectedKeyword] = useState<string | null>(null);
-  const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,12 +109,10 @@ export default function SearchSection() {
       return;
     }
     setSelectedKeyword(id);
-    setShowResults(true);
   };
 
   const handleReset = () => {
     setSelectedKeyword(null);
-    setShowResults(false);
   };
 
   // Map keyword index to thumbnail (1-based)
@@ -164,8 +161,12 @@ export default function SearchSection() {
               key={kw.id}
               type="button"
               onClick={() => handleKeywordClick(kw.id, kw.label)}
-              className={`keyword-tag border-white/40 text-white/90 hover:bg-white hover:text-omni-blue ${
-                selectedKeyword === kw.id ? 'bg-white text-omni-blue border-white' : ''
+              // 선택 시 text-omni-blue 와 text-white/90 이 동시에 적용되면
+              // 우선순위가 같아 흰 글자가 이겨 흰 배경에 묻힌다. 배타적으로 분기한다.
+              className={`keyword-tag hover:bg-white hover:text-omni-blue ${
+                selectedKeyword === kw.id
+                  ? 'bg-white text-omni-blue border-white'
+                  : 'border-white/40 text-white/90'
               }`}
             >
               {kw.label}
@@ -173,10 +174,14 @@ export default function SearchSection() {
           ))}
         </div>
 
-        {/* Results area */}
-        {showResults && (
-          <div className="animate-fade-in-up">
-            <div className="text-center mb-10">
+        {/* 브로슈어 목록 — 키워드 선택 여부와 무관하게 항상 노출하고,
+            키워드를 고르면 해당 항목만 강조한다. */}
+        <div
+          className={`transition-all duration-700 delay-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 당신을 위한 OmniEsol, 지금 만나보세요
               </h2>
@@ -191,8 +196,14 @@ export default function SearchSection() {
                 return (
                   <li
                     key={thumb.id}
+                    // 아무것도 선택하지 않았을 때는 전부 또렷하게,
+                    // 키워드를 고른 뒤에만 나머지를 흐리게 처리한다.
                     className={`transition-all duration-500 ${
-                      isHighlighted ? 'scale-105 z-10' : 'scale-100 opacity-80'
+                      isHighlighted
+                        ? 'scale-105 z-10'
+                        : selectedKeyword
+                          ? 'scale-100 opacity-50'
+                          : 'scale-100 opacity-100'
                     }`}
                   >
                     <a
@@ -221,25 +232,7 @@ export default function SearchSection() {
               })}
             </ul>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                type="button"
-                onClick={handleReset}
-                className="px-8 py-3 rounded-full bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors"
-              >
-                다시 검색하기
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Brochure button */}
-        {!showResults && (
-          <div
-            className={`text-center transition-all duration-800 delay-500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://fliphtml5.com/bookcase/zdnri/"
               target="_blank"
@@ -248,8 +241,18 @@ export default function SearchSection() {
             >
               OmniEsol E-브로슈어 보기
             </a>
+            {/* 선택을 해제할 대상이 있을 때만 노출 */}
+            {selectedKeyword && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="px-8 py-3 rounded-full bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors"
+              >
+                선택 해제
+              </button>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

@@ -1,30 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// 아이콘은 전달받은 원본 에셋(1240x1240 PNG)에서 투명 여백을 제거하고
+// 표시 크기의 3배(192px)로 리사이즈한 webp. 개당 약 7KB.
 const solutions = [
   {
     id: 'erp',
     label: 'ERP',
     path: '/erp',
-    icon: 'ri-settings-4-line',
+    icon: '/images/solution/erp.webp',
   },
   {
     id: 'groupware',
     label: '그룹웨어',
     path: '/groupware',
-    icon: 'ri-team-line',
+    icon: '/images/solution/groupware.webp',
   },
   {
     id: 'document',
     label: '문서관리',
     path: '/document',
-    icon: 'ri-file-text-line',
+    icon: '/images/solution/document.webp',
   },
   {
     id: 'ai',
     label: 'AI',
     path: '/ai',
-    icon: 'ri-brain-line',
+    icon: '/images/solution/ai.webp',
   },
 ];
 
@@ -93,9 +95,18 @@ export default function SolutionSection() {
                 className="flex flex-col items-center group bg-transparent border-none cursor-pointer w-full"
               >
                 <div className="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-omni-blue/20">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-omni-blue flex items-center justify-center transition-transform duration-300 group-hover:rotate-3">
-                    <i className={`${item.icon} text-white text-2xl md:text-3xl`} />
-                  </div>
+                  {/* 라벨 텍스트가 바로 아래에 있으므로 이미지는 장식으로 처리 */}
+                  <img
+                    src={item.icon}
+                    alt=""
+                    aria-hidden="true"
+                    width={192}
+                    height={192}
+                    // 타일 96/112px 대비 아이콘 64/80px → 사방 여백 16px 로 통일
+                    className="w-16 h-16 md:w-20 md:h-20 object-contain transition-transform duration-300 group-hover:rotate-3"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <p className="text-gray-800 font-semibold text-base md:text-lg group-hover:text-omni-blue transition-colors">
                   {item.label}
