@@ -67,10 +67,29 @@ export default function Navbar() {
               onClick={() => go('/')}
               className="flex cursor-pointer items-center gap-[14px] border-none bg-transparent"
             >
+              {/* 원본 header.asp와 동일하게 태그라인 + DOUZONE 워드마크를 나란히 배치.
+                  각 이미지는 표시 크기의 3배 해상도로 준비해 레티나에서도 선명하다. */}
+              {/* 여백을 잘라낸 뒤라 두 이미지의 비율이 4.2:1 / 4.15:1 로 거의 같다.
+                  같은 높이로 두어야 원본과 동일한 시각적 균형이 나온다. */}
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/5bf96bd1-a1f0-4e39-b976-b0817a5a1e33_compressed_logo_2026_on.webp"
-                alt="OmniEsol"
-                className="h-[38px] w-auto object-contain md:h-[52px]"
+                src="/images/logo-tagline.png"
+                alt="Authentic innovation, AX and More"
+                className="h-[26px] w-auto object-contain md:h-[38px]"
+                width={757}
+                height={180}
+                fetchPriority="high"
+                decoding="async"
+              />
+              <span
+                aria-hidden="true"
+                className="h-[22px] w-px shrink-0 bg-gray-300 md:h-[32px]"
+              />
+              <img
+                src="/images/logo-douzone.png"
+                alt="DOUZONE Business Partner 아이원소프트뱅크"
+                className="h-[26px] w-auto object-contain md:h-[38px]"
+                width={498}
+                height={120}
                 fetchPriority="high"
                 decoding="async"
               />
@@ -85,7 +104,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => go(item.path)}
-                    className={`flex h-full cursor-pointer items-center whitespace-nowrap border-none bg-transparent text-center text-[20px] leading-none transition-colors ${
+                    className={`flex h-full cursor-pointer items-center whitespace-nowrap border-none bg-transparent px-3 text-center text-[16px] leading-none transition-colors xl:px-4 xl:text-[20px] ${
                       isActive(item.path)
                         ? 'font-bold text-omni-blue'
                         : 'font-medium text-[#111] hover:font-bold hover:text-omni-blue'
