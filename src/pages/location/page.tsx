@@ -4,7 +4,7 @@ export default function LocationPage() {
   return (
     <SubPageLayout
       title="오시는 길"
-      headerBgImage="https://readdy.ai/api/search-image?query=Modern%20Seoul%20cityscape%20aerial%20view%20of%20Guro%20Digital%20Complex%20business%20district%20with%20high%20rise%20office%20buildings%20at%20golden%20hour%2C%20urban%20skyline%20panorama%2C%20warm%20sunset%20lighting%2C%20professional%20corporate%20atmosphere%2C%20soft%20atmospheric%20haze%2C%20modern%20architecture%20for%20website%20header%20background&width=1600&height=400&seq=location-bg-01&orientation=landscape"
+      headerBgImage="/images/content/bg_location.jpg"
     >
       <div className="max-w-5xl mx-auto px-4 py-10 md:py-14">
         {/* 상단 안내 + 카카오 버튼 */}

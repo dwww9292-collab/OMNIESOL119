@@ -21,7 +21,7 @@ export default function DocumentPage() {
 
             <div className="__visual mb-8 md:mb-10">
               <img
-                src="https://www.omniesol.com/img/docu_1.jpg"
+                src="/images/content/docu_1.jpg"
                 alt="OmniEsol ONEFFICE"
                 className="w-full"
               />
@@ -70,7 +70,7 @@ export default function DocumentPage() {
 
             <div className="__visual mb-8 md:mb-10">
               <img
-                src="https://www.omniesol.com/img/docu_2.jpg"
+                src="/images/content/docu_2.jpg"
                 alt="OmniEsol ONECHAMBER"
                 className="w-full"
               />

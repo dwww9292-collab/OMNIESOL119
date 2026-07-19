@@ -2,6 +2,22 @@ import { useState } from 'react';
 import Footer from '@/pages/home/components/Footer';
 import Navbar from '@/components/layout/Navbar';
 
+/**
+ * 상담신청 폼 수신 주소.
+ *
+ * 기존에는 사이트 빌더(readdy.ai)의 폼 API 로 전송되고 있었으나,
+ * 제3자 서비스에 고객 개인정보가 쌓이고 계정 만료 시 문의가 조용히
+ * 사라지는 구조라 제거했다.
+ *
+ * 자사 홈페이지 관리자 페이지가 준비되면 그 접수 URL 을 여기에 넣으면 된다.
+ * 빈 문자열인 동안에는 온라인 접수를 막고 전화 안내를 노출한다
+ * (제출된 것처럼 보이면서 아무 데도 도착하지 않는 상황을 방지).
+ */
+const INQUIRY_ENDPOINT = '';
+
+/** 온라인 접수가 막혀 있을 때 안내할 대표번호 */
+const FALLBACK_TEL = '1877-0256';
+
 export default function InquiryPage() {
   const [formData, setFormData] = useState({
     company: '',
@@ -48,6 +64,15 @@ export default function InquiryPage() {
       return;
     }
 
+    // 수신처가 아직 연결되지 않았다면 전송하지 않고 분명히 알린다.
+    if (!INQUIRY_ENDPOINT) {
+      setFormError(
+        `현재 온라인 접수가 준비 중입니다. ${FALLBACK_TEL} 으로 전화 주시면 바로 상담 도와드리겠습니다.`
+      );
+      setFormStatus('error');
+      return;
+    }
+
     setFormStatus('loading');
     setFormError('');
 
@@ -67,31 +92,20 @@ export default function InquiryPage() {
       params.append('meetingTime', formData.meetingTime);
       params.append('content', formData.content);
 
-      const res = await fetch('https://readdy.ai/api/form/d9d0g50o4b7spa5iilrg', {
+      const res = await fetch(INQUIRY_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       });
 
-      const responseText = await res.text();
-      let parsed: { code?: string; meta?: { message?: string; detail?: string } } = {};
-      try {
-        parsed = JSON.parse(responseText);
-      } catch {
-        parsed = {};
-      }
-
-      const serverMsg = parsed?.meta?.message || parsed?.meta?.detail || responseText;
-
-      if (res.ok && parsed?.code === 'OK') {
-        if (serverMsg && serverMsg.toLowerCase().includes('spam')) {
-          setFormError(serverMsg);
-          setFormStatus('error');
-        } else {
-          setFormStatus('success');
-        }
+      // 관리자 페이지 연동 시 응답 형식에 맞춰 이 부분만 조정하면 된다.
+      // 지금은 HTTP 상태 코드만으로 성공 여부를 판단한다.
+      if (res.ok) {
+        setFormStatus('success');
       } else {
-        setFormError(serverMsg || '제출에 실패했습니다. 다시 시도해주세요.');
+        setFormError(
+          `접수에 실패했습니다. 잠시 후 다시 시도하시거나 ${FALLBACK_TEL} 으로 연락해주세요.`
+        );
         setFormStatus('error');
       }
     } catch {
@@ -134,6 +148,22 @@ export default function InquiryPage() {
           </h3>
           <div className="w-12 h-1 bg-omni-blue rounded mx-auto mb-10" />
 
+          {/* 접수 URL 이 연결되기 전까지 노출. INQUIRY_ENDPOINT 를 채우면 자동으로 사라진다. */}
+          {!INQUIRY_ENDPOINT && formStatus !== 'success' && (
+            <div className="mb-8 rounded-lg border border-amber-300 bg-amber-50 px-5 py-4">
+              <p className="text-sm font-semibold text-amber-900 mb-1">
+                온라인 접수 준비 중입니다
+              </p>
+              <p className="text-sm leading-relaxed text-amber-800">
+                현재 온라인 상담 신청은 준비 중입니다. 빠른 상담을 원하시면{' '}
+                <a href={`tel:${FALLBACK_TEL}`} className="font-bold underline">
+                  {FALLBACK_TEL}
+                </a>
+                {' '}로 연락해주시면 담당자가 바로 도와드리겠습니다.
+              </p>
+            </div>
+          )}
+
           {formStatus === 'success' ? (
             <div className="text-center py-16">
               <div className="w-16 h-16 flex items-center justify-center mx-auto mb-5 bg-green-100 rounded-full">
@@ -154,7 +184,6 @@ export default function InquiryPage() {
           ) : (
             <form
               id="purchaseInquiryForm"
-              data-readdy-form
               onSubmit={handleSubmit}
               className="space-y-5"
             >

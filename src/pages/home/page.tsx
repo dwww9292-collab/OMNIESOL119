@@ -12,7 +12,7 @@ export default function Home() {
     <div className="relative w-full min-h-screen bg-white overflow-x-hidden">
       <LayerBanner
         bannerId="layerBanner1"
-        imageSrc="https://www.omniesol.com/img/main_layer_banner.png"
+        imageSrc="/images/content/main_layer_banner.png"
         href="https://www.youtube.com/@IONEsoftBK_official"
         title="[새창]아이원소프트뱅크 유튜브 채널로 이동"
         startDate="2026-03-23"
@@ -20,7 +20,7 @@ export default function Home() {
       />
       <LayerBanner
         bannerId="layerBanner2"
-        imageSrc="https://www.omniesol.com/img/main_layer_banner2.png"
+        imageSrc="/images/content/main_layer_banner2.png"
         href="https://www.theporterzone.com/event/erp10"
         title="[새창]더포터존 - 설 명절 기획전 페이지로 이동"
         startDate="2026-01-19"

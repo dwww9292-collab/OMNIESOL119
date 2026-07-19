@@ -4,7 +4,7 @@ export default function TermsPage() {
   return (
     <SubPageLayout
       title="이용약관"
-      headerBgImage="https://readdy.ai/api/search-image?query=Dark%20abstract%20corporate%20business%20background%20with%20subtle%20geometric%20patterns%20and%20soft%20blue%20gradient%20accents%2C%20minimalist%20professional%20digital%20texture%2C%20low%20contrast%20depth%20effect%2C%20modern%20enterprise%20aesthetic%20for%20website%20header&width=1600&height=400&seq=terms-bg-01&orientation=landscape"
+      headerBgImage="/images/content/bg_terms.jpg"
     >
       <div className="max-w-4xl mx-auto px-4 py-10 md:py-14">
         {/* 시행일자 */}

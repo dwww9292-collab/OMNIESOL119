@@ -15,7 +15,7 @@ export default function ErpPage() {
           </div>
           <div className="mb-8 md:mb-10">
             <img
-              src="https://www.omniesol.com/img/erp_visual.png"
+              src="/images/content/erp_visual.png"
               alt="OmniEsol ERP"
               className="w-full max-w-4xl mx-auto"
             />
@@ -55,7 +55,7 @@ export default function ErpPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="https://www.omniesol.com/img/erp_1.jpg"
+                  src="/images/content/erp_1.jpg"
                   alt="OmniEsol ERP FCM"
                   className="w-full rounded-lg"
                 />
@@ -110,7 +110,7 @@ export default function ErpPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="https://www.omniesol.com/img/erp_2.jpg"
+                  src="/images/content/erp_2.jpg"
                   alt="OmniEsol ERP HRM"
                   className="w-full rounded-lg"
                 />
@@ -163,7 +163,7 @@ export default function ErpPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="https://www.omniesol.com/img/erp_3.jpg"
+                  src="/images/content/erp_3.jpg"
                   alt="OmniEsol ERP SCM"
                   className="w-full rounded-lg"
                 />
@@ -214,7 +214,7 @@ export default function ErpPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="https://www.omniesol.com/img/erp_4.jpg"
+                  src="/images/content/erp_4.jpg"
                   alt="OmniEsol ERP CO"
                   className="w-full rounded-lg"
                 />

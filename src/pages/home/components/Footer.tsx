@@ -25,7 +25,7 @@ export default function Footer() {
           {/* 좌측: 로고 및 카피라이트 */}
           <div className="w-full lg:w-[260px] shrink-0">
             <img
-              src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/5bf96bd1-a1f0-4e39-b976-b0817a5a1e33_compressed_logo_2026_on.webp"
+              src="/images/logo-douzone.png"
               alt="iONE SOFTBANK"
               className="w-32 h-auto object-contain mb-3"
             />
@@ -70,7 +70,7 @@ export default function Footer() {
               title="네이버 블로그"
             >
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/0cb3cd9d-00d6-4f03-be85-925a771e4588_compressed_blog.webp"
+                src="/images/social/blog.webp"
                 alt="네이버 블로그"
                 className="w-full h-full object-cover"
               />
@@ -83,7 +83,7 @@ export default function Footer() {
               title="네이버 카페"
             >
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/336ff00e-8187-43dd-98cd-60df8c3f8498_compressed_cafe.webp"
+                src="/images/social/cafe.webp"
                 alt="네이버 카페"
                 className="w-full h-full object-cover"
               />
@@ -96,7 +96,7 @@ export default function Footer() {
               title="페이스북"
             >
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/cebc9719-1cd2-45ef-9001-41164ca2b29b_compressed_f.webp"
+                src="/images/social/facebook.webp"
                 alt="페이스북"
                 className="w-full h-full object-cover"
               />
@@ -109,7 +109,7 @@ export default function Footer() {
               title="링크드인"
             >
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/89ba9040-6dc2-4304-96b3-c490a38b24b5_compressed_in.webp"
+                src="/images/social/instagram.webp"
                 alt="링크드인"
                 className="w-full h-full object-cover"
               />
@@ -122,7 +122,7 @@ export default function Footer() {
               title="카카오톡"
             >
               <img
-                src="https://storage.readdy-site.link/project_files/ea993a2b-01da-4777-8bbf-bebe90db0986/f9faa8c3-6324-499c-817a-f36363fc91ab_compressed_Kakao.webp"
+                src="/images/social/kakao.webp"
                 alt="카카오톡"
                 className="w-full h-full object-cover"
               />

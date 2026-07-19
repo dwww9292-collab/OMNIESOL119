@@ -30,12 +30,12 @@ const values = [
 const videos = [
   {
     title: 'OmniEsol 도입 사례',
-    poster: 'https://www.omniesol.com/img/poster_1.png',
+    poster: '/images/content/poster_1.png',
     src: 'https://api.joongang.co.kr/moka_api/ovp.proxy.temporary?id=6366168647112',
   },
   {
     title: 'OmniEsol의 모든 것',
-    poster: 'https://www.omniesol.com/img/poster_2.png',
+    poster: '/images/content/poster_2.png',
     src: 'https://api.joongang.co.kr/moka_api/ovp.proxy.temporary?id=6366168257112',
   },
 ];

@@ -70,7 +70,7 @@ export default function AiPage() {
             <div className="mb-6 md:mb-8">
               <div className="mb-4">
                 <img
-                  src="https://www.omniesol.com/img/ai_1.jpg"
+                  src="/images/content/ai_1.jpg"
                   alt="ONE AI"
                   className="w-full"
                 />
@@ -127,7 +127,7 @@ export default function AiPage() {
               <li className="border border-gray-200">
                 <b className="block px-4 pt-4 pb-2 text-sm md:text-base text-gray-900">ONE AI 기업의 업무 생산성 향상을 위한 도구</b>
                 <img
-                  src="https://www.omniesol.com/img/ai_2_1.jpg"
+                  src="/images/content/ai_2_1.jpg"
                   alt="ONE AI 문서 작성"
                   className="w-full"
                 />
@@ -140,7 +140,7 @@ export default function AiPage() {
               <li className="border border-gray-200">
                 <b className="block px-4 pt-4 pb-2 text-sm md:text-base text-gray-900">회계관리</b>
                 <img
-                  src="https://www.omniesol.com/img/ai_2_2.jpg"
+                  src="/images/content/ai_2_2.jpg"
                   alt="ONE AI 회계관리"
                   className="w-full"
                 />
@@ -153,7 +153,7 @@ export default function AiPage() {
               <li className="border border-gray-200">
                 <b className="block px-4 pt-4 pb-2 text-sm md:text-base text-gray-900">AI 문서 기반 질의응답 다중 문서 분석</b>
                 <img
-                  src="https://www.omniesol.com/img/ai_2_3.jpg"
+                  src="/images/content/ai_2_3.jpg"
                   alt="ONE AI 문서 분석"
                   className="w-full"
                 />
@@ -166,7 +166,7 @@ export default function AiPage() {
               <li className="border border-gray-200">
                 <b className="block px-4 pt-4 pb-2 text-sm md:text-base text-gray-900">인사관리</b>
                 <img
-                  src="https://www.omniesol.com/img/ai_2_4.jpg"
+                  src="/images/content/ai_2_4.jpg"
                   alt="ONE AI 인사관리"
                   className="w-full"
                 />
@@ -191,7 +191,7 @@ export default function AiPage() {
             </div>
             <div className="text-center">
               <img
-                src="https://www.omniesol.com/img/ai_3.svg"
+                src="/images/content/ai_3.svg"
                 alt="ONE AI 혁신"
                 className="w-full max-w-3xl mx-auto"
               />
@@ -253,7 +253,7 @@ export default function AiPage() {
             <div className="mb-6 md:mb-8">
               <div className="mb-4">
                 <img
-                  src="https://www.omniesol.com/img/ai_4.svg"
+                  src="/images/content/ai_4.svg"
                   alt="설계/개발/운영"
                   className="w-full max-w-3xl mx-auto"
                 />
@@ -320,7 +320,7 @@ export default function AiPage() {
             <div className="mb-6 md:mb-8">
               <div className="relative">
                 <img
-                  src="https://www.omniesol.com/img/ai_5.jpg"
+                  src="/images/content/ai_5.jpg"
                   alt="GEN AI DEWS 개발 툴"
                   className="w-full"
                 />
@@ -372,7 +372,7 @@ export default function AiPage() {
             <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
               <div className="lg:w-1/2">
                 <img
-                  src="https://www.omniesol.com/img/ai_6.jpg"
+                  src="/images/content/ai_6.jpg"
                   alt="AI 개발자 지원"
                   className="w-full"
                 />

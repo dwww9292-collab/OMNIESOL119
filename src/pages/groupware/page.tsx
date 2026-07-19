@@ -19,7 +19,7 @@ export default function GroupwarePage() {
             {/* Visual image */}
             <div className="__visual mb-8 md:mb-10">
               <img
-                src="https://www.omniesol.com/img/groupware.jpg"
+                src="/images/content/groupware.jpg"
                 alt="OmniEsol Groupware"
                 className="w-full"
               />

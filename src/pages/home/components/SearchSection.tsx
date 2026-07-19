@@ -214,7 +214,7 @@ export default function SearchSection() {
                     >
                       <div className="relative rounded-xl overflow-hidden bg-white/10 aspect-[3/4] mb-2">
                         <img
-                          src={`https://www.omniesol.com/img/thumb/thumb_${thumb.id}.jpg`}
+                          src={`/images/content/thumb/thumb_${thumb.id}.jpg`}
                           alt={thumb.label.replace('\n', ' ')}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           loading="lazy"

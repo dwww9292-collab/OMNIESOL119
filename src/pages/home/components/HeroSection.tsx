@@ -37,7 +37,7 @@ export default function HeroSection() {
           }`}
         >
           <img
-            src="https://www.omniesol.com/img/main.png"
+            src="/images/content/main.png"
             alt="OmniEsol 메인 비주얼"
             className="w-full h-auto object-contain"
           />
