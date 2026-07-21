@@ -47,6 +47,32 @@ export default function InquiryPage() {
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState('');
+  const [meetingDateError, setMeetingDateError] = useState('');
+
+  /**
+   * 미팅날짜 선택 처리.
+   * "YYYY-MM-DD" 를 그대로 new Date() 에 넣으면 UTC 자정으로 해석되어
+   * 시간대에 따라 요일이 하루 밀릴 수 있다. 연·월·일을 분해해 로컬 날짜로 만든다.
+   */
+  const handleMeetingDateChange = (value: string) => {
+    if (!value) {
+      setMeetingDateError('');
+      setFormData((prev) => ({ ...prev, meetingDate: '' }));
+      return;
+    }
+
+    const [y, m, d] = value.split('-').map(Number);
+    const day = new Date(y, m - 1, d).getDay(); // 0=일, 6=토
+
+    if (day === 0 || day === 6) {
+      setMeetingDateError('미팅날짜는 영업일(월~금)만 선택 가능합니다.');
+      setFormData((prev) => ({ ...prev, meetingDate: '' }));
+      return;
+    }
+
+    setMeetingDateError('');
+    setFormData((prev) => ({ ...prev, meetingDate: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,6 +84,13 @@ export default function InquiryPage() {
 
     if (!formData.company || !formData.writer || !formData.phone1 || !formData.emailLocal || !formData.content || !formData.privacy) {
       setFormError('필수 항목을 모두 입력해주세요.');
+      return;
+    }
+
+    // 미팅방법은 선택사항이지만, 고른 경우 날짜·시간은 필수 (기존 구매상담과 동일 정책).
+    // 서버도 같은 조건으로 400 을 반환하므로 여기서 먼저 막는다.
+    if (formData.meetingMethod && (!formData.meetingDate || !formData.meetingTime)) {
+      setFormError('미팅방법을 선택하신 경우 미팅날짜와 미팅시간을 모두 입력해주세요.');
       return;
     }
 
@@ -373,22 +406,32 @@ export default function InquiryPage() {
               {formData.meetingMethod && (
                 <>
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center">
-                    <label className="text-gray-700 text-sm font-medium w-28 shrink-0">미팅날짜</label>
+                    <label className="text-gray-700 text-sm font-medium w-28 shrink-0">
+                      미팅날짜 <span className="text-red-500">*</span>
+                    </label>
                     <div className="flex-1 min-w-0">
                       <input
                         type="date"
                         name="meetingDate"
                         value={formData.meetingDate}
                         min={new Date().toISOString().split('T')[0]}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, meetingDate: e.target.value }))}
-                        className="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-omni-blue"
+                        onChange={(e) => handleMeetingDateChange(e.target.value)}
+                        aria-invalid={meetingDateError ? true : undefined}
+                        className={`border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-omni-blue ${
+                          meetingDateError ? 'border-red-400' : 'border-gray-300'
+                        }`}
                       />
                       <span className="text-gray-400 text-xs ml-3">(영업일 기준 월~금만 선택 가능)</span>
+                      {meetingDateError && (
+                        <p className="text-red-500 text-xs mt-1.5">{meetingDateError}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center">
-                    <label className="text-gray-700 text-sm font-medium w-28 shrink-0">미팅시간</label>
+                    <label className="text-gray-700 text-sm font-medium w-28 shrink-0">
+                      미팅시간 <span className="text-red-500">*</span>
+                    </label>
                     <select
                       name="meetingTime"
                       value={formData.meetingTime}
