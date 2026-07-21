@@ -18,6 +18,13 @@ const INQUIRY_ENDPOINT = '';
 /** 온라인 접수가 막혀 있을 때 안내할 대표번호 */
 const FALLBACK_TEL = '1877-0256';
 
+/**
+ * 접수 시스템의 제품 구분값.
+ * 본사 접수 테이블은 여러 제품(Amaranth 10, WEHAGO 등)을 함께 다루지만
+ * 이 사이트는 OmniEsol 전용이므로 사용자에게 묻지 않고 고정값으로 보낸다.
+ */
+const PRODUCT_CATEGORY = 'OmniEsol';
+
 export default function InquiryPage() {
   const [formData, setFormData] = useState({
     company: '',
@@ -76,6 +83,8 @@ export default function InquiryPage() {
       params.append('position', formData.position);
       params.append('phone', `${formData.phone1}-${formData.phone2}-${formData.phone3}`);
       params.append('email', `${formData.emailLocal}@${formData.emailDomain}`);
+      // 사용자 입력이 아닌 고정 구분값
+      params.append('products', PRODUCT_CATEGORY);
       params.append('meetingMethod', formData.meetingMethod);
       params.append('meetingDate', formData.meetingDate);
       params.append('meetingTime', formData.meetingTime);
