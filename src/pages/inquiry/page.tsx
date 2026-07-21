@@ -13,7 +13,7 @@ import Navbar from '@/components/layout/Navbar';
  * 빈 문자열인 동안에는 온라인 접수를 막고 전화 안내를 노출한다
  * (제출된 것처럼 보이면서 아무 데도 도착하지 않는 상황을 방지).
  */
-const INQUIRY_ENDPOINT = '';
+const INQUIRY_ENDPOINT = 'https://www.duzon119.co.kr/api/landing_inquiry.asp';
 
 /** 온라인 접수가 막혀 있을 때 안내할 대표번호 */
 const FALLBACK_TEL = '1877-0256';
@@ -122,11 +122,17 @@ export default function InquiryPage() {
       params.append('meetingDate', formData.meetingDate);
       params.append('meetingTime', formData.meetingTime);
       params.append('content', formData.content);
+      // 개인정보 동의 이력. 미전송 시 서버가 1 로 저장하므로 명시적으로 보낸다.
+      params.append('privacyAgree', formData.privacy ? '1' : '0');
 
+      // 헤더를 직접 지정하지 말 것.
+      // 접수 서버 앞단의 보안장비가 OPTIONS(프리플라이트)를 406 으로 차단하므로
+      // 반드시 "단순 요청"으로 보내야 한다. URLSearchParams 를 body 로 넘기면
+      // 브라우저가 application/x-www-form-urlencoded 를 자동으로 붙여준다.
+      // Content-Type 을 JSON 으로 바꾸거나 커스텀 헤더를 추가하면 전송이 실패한다.
       const res = await fetch(INQUIRY_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
+        body: params,
       });
 
       // 관리자 페이지 연동 시 응답 형식에 맞춰 이 부분만 조정하면 된다.
