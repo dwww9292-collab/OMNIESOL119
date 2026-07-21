@@ -31,7 +31,6 @@ export default function InquiryPage() {
     phone3: '',
     emailLocal: '',
     emailDomain: '',
-    products: [] as string[],
     meetingMethod: '',
     meetingDate: '',
     meetingTime: '',
@@ -41,15 +40,6 @@ export default function InquiryPage() {
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState('');
-
-  const handleProductChange = (product: string, checked: boolean) => {
-    setFormData((prev) => ({
-      ...prev,
-      products: checked
-        ? [...prev.products, product]
-        : prev.products.filter((p) => p !== product),
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,7 +76,6 @@ export default function InquiryPage() {
       params.append('position', formData.position);
       params.append('phone', `${formData.phone1}-${formData.phone2}-${formData.phone3}`);
       params.append('email', `${formData.emailLocal}@${formData.emailDomain}`);
-      params.append('products', formData.products.join(', '));
       params.append('meetingMethod', formData.meetingMethod);
       params.append('meetingDate', formData.meetingDate);
       params.append('meetingTime', formData.meetingTime);
@@ -351,26 +340,6 @@ export default function InquiryPage() {
                 </div>
               </div>
 
-              {/* 제품선택 */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
-                <label className="text-gray-700 text-sm font-medium w-28 shrink-0 pt-2">제품선택</label>
-                <div className="flex flex-wrap gap-4">
-                  {['Amaranth 10', 'WEHAGO(SmartA10)', '그룹웨어', 'PMS/SI'].map((product) => (
-                    <label key={product} className="flex items-center gap-2 cursor-pointer text-sm text-gray-700">
-                      <input
-                        type="checkbox"
-                        name="products"
-                        value={product}
-                        checked={formData.products.includes(product)}
-                        onChange={(e) => handleProductChange(product, e.target.checked)}
-                        className="w-4 h-4 accent-omni-blue"
-                      />
-                      {product}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
               {/* 미팅방법 */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
                 <label className="text-gray-700 text-sm font-medium w-28 shrink-0 pt-2">미팅방법</label>
@@ -459,7 +428,7 @@ export default function InquiryPage() {
                   아이원소프트뱅크 주식회사는 개인정보보호법 및 정보통신망 이용촉진 및 정보 보호 등에 관한 법률에 따라
                   정보주체의 개인정보 및 권익을 보호하고 개인정보와 관련한 정보주체의 고 충을 원활하게 처리할 수 있도록
                   다음과 같은 처리방침을 두고 있습니다. 수집하는 개인정보 항목: 상호, 사업자등록번호, 전화번호,
-                  담당자명, 직위, 핸드폰번호, 이메일, 제품선택, 문의내용. 개인정보 수집 목적: 구매상담 및 서비스 제공.
+                  담당자명, 직위, 핸드폰번호, 이메일, 문의내용. 개인정보 수집 목적: 구매상담 및 서비스 제공.
                   개인정보 보유기간: 목적 달성 후 즉시 파기.
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700">
